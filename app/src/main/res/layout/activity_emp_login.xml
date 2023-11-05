@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
     tools:context=".emp.EmpLoginActivity" android:layout_width="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="0.8"
+        android:layout_height="0dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="20dp"
+            android:textSize="32dp"
+            android:textStyle="italic"
+            android:text="Hi Employee!"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,38 +29,42 @@
         <EditText
             android:id="@+id/emp_login_user_text"
             android:layout_width="match_parent"
-            android:layout_height="37dp"
+            android:layout_height="50dp"
+            android:textSize="20dp"
             android:background="@drawable/input_item"
             android:hint="Username"
-            android:paddingHorizontal="5dp"
+            android:paddingHorizontal="15dp"
             />
         <EditText
             android:id="@+id/emp_login_pass_text"
             android:layout_width="match_parent"
-            android:layout_height="37dp"
+            android:layout_height="50dp"
+            android:textSize="20dp"
             android:background="@drawable/input_item"
             android:hint="Password"
             android:password="true"
-            android:layout_marginTop="15dp"
-            android:paddingHorizontal="5dp"
+            android:layout_marginTop="20dp"
+            android:paddingHorizontal="15dp"
             />
         <Button
             android:id="@+id/emp_login_btn"
             android:layout_width="match_parent"
-            android:layout_height="37dp"
-            android:layout_marginTop="15dp"
+            android:layout_height="50dp"
+            android:textSize="18dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/button_item"
-            android:text="LOGIN"
-            android:layout_marginHorizontal="15dp"/>
+            android:text="LOGIN" />
         <TextView
             android:id="@+id/man_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textStyle="italic"
             android:text="I'm Manager"
-            android:gravity="right"
-            android:layout_margin="20dp"/>
+            android:layout_marginTop="20dp"
+            android:gravity="right" />
     </LinearLayout>
 
 
 
-</RelativeLayout>
+</LinearLayout>
