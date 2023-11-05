@@ -24,18 +24,126 @@
         android:layout_below="@+id/man_add_good"
         android:background="@drawable/input_item"
         app:queryHint="Search"/>
+
+    <LinearLayout
+        android:layout_below="@id/man_search_good"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="15dp"
+            android:weightSum="15">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Code"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <TextView
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="6"
+                android:text="Name"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="3"
+                android:text="Price"
+                android:textSize="18dp"
+                android:gravity="center"
+                android:textStyle="bold" />
+            <TextView
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="Qu"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/emp_item_edit_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            >
+            <EditText
+                android:id="@+id/emp_item_new_pass"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:background="@drawable/input_item"
+                android:hint="New Password"
+
+                android:layout_marginTop="15dp"
+                android:paddingHorizontal="5dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                >
+                <Button
+                    android:id="@+id/emp_item_cancel"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="7dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/button_item"
+                    android:text="Cancel" />
+                <Button
+                    android:id="@+id/emp_item_submit"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/button_item"
+                    android:text="Submit" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/man_good_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/man_search_good"
+        android:layout_below="@+id/content"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="13dp" />
 
     <RelativeLayout
-        android:id="@+id/man_emp_add_layout"
+        android:id="@+id/man_good_add_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white_trans"
@@ -48,15 +156,17 @@
             android:layout_centerInParent="true"
 
             >
-            <TextView
-                android:id="@+id/man_emp_id"
+            <EditText
+                android:id="@+id/man_good_code"
                 android:layout_width="match_parent"
                 android:layout_height="37dp"
                 android:background="@drawable/input_item"
+                android:hint="Barcode"
                 android:paddingHorizontal="5dp"
+                android:layout_marginTop="15dp"
                 />
             <EditText
-                android:id="@+id/man_emp_name"
+                android:id="@+id/man_good_name"
                 android:layout_width="match_parent"
                 android:layout_height="37dp"
                 android:background="@drawable/input_item"
@@ -65,12 +175,22 @@
                 android:layout_marginTop="15dp"
                 />
             <EditText
-                android:id="@+id/man_emp_pass"
+                android:id="@+id/man_good_price"
                 android:layout_width="match_parent"
                 android:layout_height="37dp"
                 android:background="@drawable/input_item"
-                android:hint="Password"
-
+                android:hint="Price"
+                android:inputType="number"
+                android:layout_marginTop="15dp"
+                android:paddingHorizontal="5dp"
+                />
+            <EditText
+                android:id="@+id/man_good_quantity"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:background="@drawable/input_item"
+                android:hint="Quantity"
+                android:inputType="number"
                 android:layout_marginTop="15dp"
                 android:paddingHorizontal="5dp"
                 />
@@ -80,7 +200,7 @@
                 android:weightSum="2"
                 >
                 <Button
-                    android:id="@+id/man_cancel_add_emp"
+                    android:id="@+id/man_cancel_add_good"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
@@ -91,7 +211,7 @@
                     android:background="@drawable/button_item"
                     android:text="Cancel" />
                 <Button
-                    android:id="@+id/man_submit_add_emp"
+                    android:id="@+id/man_submit_add_good"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
