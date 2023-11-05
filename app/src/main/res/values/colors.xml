@@ -15,4 +15,5 @@
     <color name="Light_Gray">#D1D2D2</color>
     <color name="Pastel_Blue">#AFC5CF</color>
     <color name="Light_Salmon_Pink">#F7A193</color>
+    <color name="white_trans">#BFFFFFFF</color>
 </resources>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".man.ManageEmpActivity">
+
+    <Button
+        android:id="@+id/man_add_emp"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/button_item"
+        android:text="New Employee" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/man_emp_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/man_add_emp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="13dp" />
+
+    <RelativeLayout
+        android:id="@+id/man_emp_add_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_trans"
+        android:visibility="gone">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+
+            >
+            <TextView
+                android:id="@+id/man_emp_id"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:background="@drawable/input_item"
+                android:paddingHorizontal="5dp"
+                />
+            <EditText
+                android:id="@+id/man_emp_name"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:background="@drawable/input_item"
+                android:hint="Name"
+                android:paddingHorizontal="5dp"
+                android:layout_marginTop="15dp"
+                />
+            <EditText
+                android:id="@+id/man_emp_pass"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:background="@drawable/input_item"
+                android:hint="Password"
+
+                android:layout_marginTop="15dp"
+                android:paddingHorizontal="5dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                >
+                <Button
+                    android:id="@+id/man_cancel_add_emp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="7dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/button_item"
+                    android:text="Cancel" />
+                <Button
+                    android:id="@+id/man_submit_add_emp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/button_item"
+                    android:text="Submit" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

@@ -19,6 +19,7 @@
             android:layout_height="37dp"
             android:background="@drawable/input_item"
             android:hint="Username"
+            android:paddingHorizontal="5dp"
             />
         <EditText
             android:id="@+id/pass_text"
@@ -28,6 +29,7 @@
             android:hint="Password"
             android:password="true"
             android:layout_marginTop="15dp"
+            android:paddingHorizontal="5dp"
             />
         <Button
             android:id="@+id/man_login_btn"

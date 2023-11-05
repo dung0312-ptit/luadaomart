@@ -16,6 +16,12 @@
         android:theme="@style/Theme.Luadaomart"
         tools:targetApi="31">
         <activity
+            android:name=".man.ManageStorageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".man.ManageEmpActivity"
+            android:exported="false" />
+        <activity
             android:name=".man.ManHomeActivity"
             android:exported="false" />
         <activity
@@ -32,8 +38,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>
