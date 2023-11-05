@@ -16,7 +16,7 @@ public class GoodViewHolder extends RecyclerView.ViewHolder {
     public TextView codeTxt,nameTxt,priceTxt,quanTxt;
     public Button addBtn,deleteBtn,cancelBtn,submitBtn;
     public EditText amountTxt;
-    public LinearLayout addLayout;
+    public LinearLayout addLayout,configLayout;
 
    public GoodViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -31,5 +31,6 @@ public class GoodViewHolder extends RecyclerView.ViewHolder {
         submitBtn = itemView.findViewById(R.id.good_item_submit);
         amountTxt = itemView.findViewById(R.id.good_item_amount);
         addLayout = itemView.findViewById(R.id.good_item_edit_layout);
+        configLayout = itemView.findViewById(R.id.good_item_config_layout);
     }
 }
