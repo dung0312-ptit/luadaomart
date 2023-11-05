@@ -12,7 +12,7 @@
         android:orientation="vertical"
         >
         <EditText
-            android:id="@+id/emp_login_user_text"
+            android:id="@+id/user_text"
             android:layout_width="match_parent"
             android:layout_height="37dp"
             android:background="@drawable/input_item"
@@ -20,7 +20,7 @@
             android:paddingHorizontal="5dp"
             />
         <EditText
-            android:id="@+id/emp_login_pass_text"
+            android:id="@+id/pass_text"
             android:layout_width="match_parent"
             android:layout_height="37dp"
             android:background="@drawable/input_item"
@@ -30,7 +30,7 @@
             android:paddingHorizontal="5dp"
             />
         <Button
-            android:id="@+id/emp_login_btn"
+            android:id="@+id/man_login_btn"
             android:layout_width="match_parent"
             android:layout_height="37dp"
             android:layout_marginTop="15dp"

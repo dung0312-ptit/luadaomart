@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
     tools:context=".man.ManLoginActivity">
 
-    
     <LinearLayout
         android:layout_width="match_parent"
+        android:gravity="bottom"
+        android:layout_weight="0.8"
+        android:layout_height="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textStyle="italic"
+            android:textSize="32dp"
+            android:textAllCaps="false"
+            android:text="Hi Manager!"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:paddingTop="10dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:orientation="vertical"
@@ -16,29 +34,32 @@
         <EditText
             android:id="@+id/user_text"
             android:layout_width="match_parent"
-            android:layout_height="37dp"
+            android:layout_height="50dp"
+            android:textSize="20dp"
             android:background="@drawable/input_item"
             android:hint="Username"
-            android:paddingHorizontal="5dp"
+            android:paddingHorizontal="15dp"
             />
         <EditText
             android:id="@+id/pass_text"
             android:layout_width="match_parent"
-            android:layout_height="37dp"
+            android:layout_height="50dp"
+            android:textSize="20dp"
             android:background="@drawable/input_item"
             android:hint="Password"
             android:password="true"
-            android:layout_marginTop="15dp"
-            android:paddingHorizontal="5dp"
+            android:layout_marginTop="20dp"
+            android:paddingHorizontal="15dp"
             />
         <Button
             android:id="@+id/man_login_btn"
             android:layout_width="match_parent"
-            android:layout_height="37dp"
-            android:layout_marginTop="15dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:textSize="18dp"
             android:background="@drawable/button_item"
-            android:text="LOGIN"
-            android:layout_marginHorizontal="15dp"/>
+            android:textStyle="normal"
+            android:text="LOGIN" />
 
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>
