@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:weightSum="13">
+
+        <TextView
+            android:id="@+id/order_his_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="13123213"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/order_his_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="4"
+            android:text="2023/11/05"
+            android:textSize="16dp"
+            android:textStyle="normal" />
+        <TextView
+            android:id="@+id/order_his_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="4"
+            android:text="0888888888"
+            android:textSize="16dp"
+            android:gravity="center"
+            android:textStyle="normal" />
+        <TextView
+            android:id="@+id/order_his_total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="2"
+            android:text="20000"
+            android:textSize="16dp"
+            android:textStyle="normal"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

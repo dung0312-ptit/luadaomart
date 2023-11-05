@@ -24,6 +24,7 @@ import com.example.luadaomart.man.ManageStorageActivity;
 import com.example.luadaomart.model.Good;
 import com.example.luadaomart.model.Order;
 import com.example.luadaomart.model.OrderDetail;
+import com.example.luadaomart.ultity.InvoiceGenerator;
 import com.example.luadaomart.viewholder.GoodOderViewHolder;
 import com.example.luadaomart.viewholder.GoodViewHolder;
 import com.example.luadaomart.viewholder.OrderDetailViewHolder;
@@ -130,6 +131,12 @@ public class NewOrderActivity extends AppCompatActivity implements GoodOrderAdap
                 orderCol.document(order.getTimestamps()+"").collection("detail").document(od.getId()).set(od);
             }
 
+            InvoiceGenerator invoice = new InvoiceGenerator(orderDetails,order);
+            invoice.createInvoice();
+
+            Intent intent = new Intent(NewOrderActivity.this,EmpHomeActivity.class);
+            startActivity(intent);
+            finish();
         });
 
     }
