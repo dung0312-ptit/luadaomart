@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Luadaomart"
         tools:targetApi="31">
         <activity
+            android:name=".emp.NewOrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".man.ManageStorageActivity"
             android:exported="false" />
         <activity
@@ -26,6 +29,9 @@
             android:exported="false" />
         <activity
             android:name=".man.ManLoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".emp.EmpHomeActivity"
             android:exported="false" />
         <activity
             android:name=".emp.EmpLoginActivity"
