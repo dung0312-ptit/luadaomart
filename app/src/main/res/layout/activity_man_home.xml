@@ -58,9 +58,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginTop="7dp"/>
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:text="Income Statistical"
+                android:textSize="20dp"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"/>
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/man_income_spin"
+                android:entries="@array/income"
+                android:background="@drawable/input_item"/>
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/man_home_table"
+                android:stretchColumns="*"
+                android:layout_marginTop="10dp">
+            </TableLayout>
         </LinearLayout>
-
     </ScrollView>
 
 </RelativeLayout>
