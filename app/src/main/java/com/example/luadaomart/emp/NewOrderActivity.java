@@ -15,24 +15,27 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.luadaomart.R;
 import com.example.luadaomart.adapter.GoodOrderAdapter;
 import com.example.luadaomart.inteface.GoodOrderItemOnclickListener;
-import com.example.luadaomart.man.ManageStorageActivity;
+import com.example.luadaomart.model.DayStatistical;
+import com.example.luadaomart.model.Employee;
+import com.example.luadaomart.model.EmployeeStatistical;
 import com.example.luadaomart.model.Good;
+import com.example.luadaomart.model.MonthStatistical;
 import com.example.luadaomart.model.Order;
 import com.example.luadaomart.model.OrderDetail;
 import com.example.luadaomart.ultity.InvoiceGenerator;
 import com.example.luadaomart.viewholder.GoodOderViewHolder;
-import com.example.luadaomart.viewholder.GoodViewHolder;
-import com.example.luadaomart.viewholder.OrderDetailViewHolder;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -41,23 +44,30 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class NewOrderActivity extends AppCompatActivity implements GoodOrderAdapter.onDetailItemListener{
+public class NewOrderActivity extends AppCompatActivity implements GoodOrderAdapter.onDetailItemListener {
 
     private static final String TAG = "new order";
     private SearchView searchView;
-    private RecyclerView searchRv,detailRv;
-    private TextView totalTxt,dateTxt;
+    private RecyclerView searchRv, detailRv;
+    private TextView totalTxt, dateTxt;
     private EditText phoneTxt;
     private Button cancelBtn, checkoutBtn;
-    
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference goodCol,orderCol;
-    private FirestoreRecyclerAdapter<Good, GoodOderViewHolder> searchSdapter;
 
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference goodCol, orderCol;
+    private FirestoreRecyclerAdapter<Good, GoodOderViewHolder> searchSdapter;
 
 
     private Order order;
     private GoodOrderAdapter detailApdater;
+    private DayStatistical ds;
+    private MonthStatistical ms;
+    private EmployeeStatistical es;
+    private SimpleDateFormat dFormatter = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat mFormatter = new SimpleDateFormat("yyyy-MM");
+
+    private Employee employee = EmpLoginActivity.employee;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +75,7 @@ public class NewOrderActivity extends AppCompatActivity implements GoodOrderAdap
 
         goodCol = db.collection("goods");
         orderCol = db.collection("orders");
-        
+
         searchView = findViewById(R.id.order_search_good);
         searchRv = findViewById(R.id.order_good_rv);
         detailRv = findViewById(R.id.order_chose_rv);
@@ -77,23 +87,29 @@ public class NewOrderActivity extends AppCompatActivity implements GoodOrderAdap
 
 
         order = new Order(System.currentTimeMillis());
+        //monthStatistic();
+        checkMonthStatistic();
+        checkDayStatistic();
 
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
-        String dateString = formatter.format(new Date(order.getTimestamps()));
+        String dateString = dFormatter.format(new Date(order.getTimestamps()));
         dateTxt.setText(dateString);
 
         totalTxt.setText("0");
 
         LinearLayoutManager manage = new LinearLayoutManager(this);
         detailRv.setLayoutManager(manage);
-        detailApdater  = new GoodOrderAdapter(new ArrayList<>(),order.getTotalPrices());
+        detailApdater = new GoodOrderAdapter(new ArrayList<>(), order.getTotalPrices());
         detailApdater.setListener(this);
         detailRv.setAdapter(detailApdater);
 
-        cancelBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(NewOrderActivity.this, EmpHomeActivity.class);
-            startActivity(intent);
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NewOrderActivity.this, EmpHomeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
         });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -123,27 +139,86 @@ public class NewOrderActivity extends AppCompatActivity implements GoodOrderAdap
             List<OrderDetail> orderDetails = detailApdater.getList();
             order.setEmployeeId(EmpHomeActivity.employee.getId());
             order.setEmployeeName(EmpHomeActivity.employee.getName());
-            order.setCusPhone(phoneTxt.getText().toString().trim());
 
+            String phone = phoneTxt.getText().toString().trim();
+            if (phone.equals("")) phone += "no infor";
+            order.setCusPhone(phone);
+            int t = order.getTotalPrices();
 
-            orderCol.document(order.getTimestamps()+"").set(order);
-            for(OrderDetail od : orderDetails){
-                orderCol.document(order.getTimestamps()+"").collection("detail").document(od.getId()).set(od);
+            orderCol.document(order.getTimestamps() + "").set(order);
+            for (OrderDetail od : orderDetails) {
+                orderCol.document(order.getTimestamps() + "").collection("detail").document(od.getId()).set(od);
             }
 
-            InvoiceGenerator invoice = new InvoiceGenerator(orderDetails,order);
-            invoice.createInvoice();
+            doStatisticAndInvoce(orderDetails);
 
-            Intent intent = new Intent(NewOrderActivity.this,EmpHomeActivity.class);
-            startActivity(intent);
-            finish();
+
+            //finish();
         });
 
     }
 
+    private void doStatisticAndInvoce(List<OrderDetail> orderDetails) {
+        ds.setCount(ds.getCount() + 1);
+        ds.setTotal(ds.getTotal() + order.getTotalPrices());
+        ms.setCount(ms.getCount() + 1);
+        ms.setTotal(ms.getTotal() + order.getTotalPrices());
+
+        db.collection("monthStatisticals").document(ms.getMonth()).set(ms);
+        db.collection("dayStatisticals").document(ds.getDay()).set(ds);
+        db.collection("emStatisticals").document(employee.getId()).update("count",1);
+        db.collection("emStatisticals").document(employee.getId()).update("total",order.getTotalPrices());
+        InvoiceGenerator invoice = new InvoiceGenerator(orderDetails, order);
+        invoice.createInvoice();
+
+
+        Intent intent = new Intent(NewOrderActivity.this, EmpHomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+
+    }
+
+    private void checkDayStatistic() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = formatter.format(new Date(order.getTimestamps())).trim();
+        Log.d(TAG, dateString);
+
+        db.collection("dayStatisticals").document(dateString).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (!documentSnapshot.exists()) {
+                            ds = new DayStatistical(dateString, 0, 0);
+                            db.collection("dayStatisticals").document(dateString).set(ds);
+                        } else {
+                            ds = documentSnapshot.toObject(DayStatistical.class);
+                        }
+                    }
+                });
+    }
+
+    private void checkMonthStatistic() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
+        String dateString = formatter.format(new Date(order.getTimestamps())).trim();
+        Log.d(TAG, dateString);
+
+        db.collection("monthStatisticals").document(dateString).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (!documentSnapshot.exists()) {
+                            ms = new MonthStatistical(dateString, 0, 0);
+                            db.collection("monthStatisticals").document(dateString).set(ms);
+                        } else {
+                            ms = documentSnapshot.toObject(MonthStatistical.class);
+                        }
+                    }
+                });
+    }
+
 
     private void getGoodList(String s) {
-        Query query = goodCol.orderBy("code").startAt(s).endAt(s+"\uf8ff");
+        Query query = goodCol.orderBy("code").startAt(s).endAt(s + "\uf8ff");
 
         FirestoreRecyclerOptions<Good> options = new FirestoreRecyclerOptions.Builder<Good>()
                 .setQuery(query, Good.class)
@@ -153,8 +228,8 @@ public class NewOrderActivity extends AppCompatActivity implements GoodOrderAdap
             protected void onBindViewHolder(@NonNull GoodOderViewHolder holder, int position, @NonNull Good model) {
                 holder.codeTxt.setText(model.getCode());
                 holder.nameTxt.setText(model.getName());
-                holder.priceTxt.setText(model.getPrice()+"");
-                holder.quanTxt.setText(model.getQuantity()+"");
+                holder.priceTxt.setText(model.getPrice() + "");
+                holder.quanTxt.setText(model.getQuantity() + "");
                 holder.configLayout.setVisibility(View.INVISIBLE);
 
                 holder.setListener(new GoodOrderItemOnclickListener() {
@@ -165,10 +240,12 @@ public class NewOrderActivity extends AppCompatActivity implements GoodOrderAdap
                     }
                 });
             }
+
             @Override
             public int getItemCount() {
                 return this.getSnapshots().size();
             }
+
             @NonNull
             @Override
             public GoodOderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -186,11 +263,11 @@ public class NewOrderActivity extends AppCompatActivity implements GoodOrderAdap
     }
 
     private void choseGood(Good model) {
-        OrderDetail orderDetail = new OrderDetail(model.getCode(),model.getName(),model.getPrice(),1,model.getPrice());
-        order.setTotalPrices(order.getTotalPrices()+model.getPrice());
+        OrderDetail orderDetail = new OrderDetail(model.getCode(), model.getName(), model.getPrice(), 1, model.getPrice());
+        order.setTotalPrices(order.getTotalPrices() + model.getPrice());
         detailApdater.setTotal(order.getTotalPrices());
         detailApdater.list.add(orderDetail);
-        totalTxt.setText(order.getTotalPrices()+"");
+        totalTxt.setText(order.getTotalPrices() + "");
         detailApdater.notifyDataSetChanged();
     }
 
@@ -198,6 +275,6 @@ public class NewOrderActivity extends AppCompatActivity implements GoodOrderAdap
     @Override
     public void newTotal(int total) {
         order.setTotalPrices(total);
-        totalTxt.setText(total+"");
+        totalTxt.setText(total + "");
     }
 }

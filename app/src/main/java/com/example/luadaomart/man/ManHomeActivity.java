@@ -22,6 +22,8 @@ import android.widget.Toast;
 
 import com.example.luadaomart.R;
 import com.example.luadaomart.model.Admin;
+import com.example.luadaomart.model.DayStatistical;
+import com.example.luadaomart.model.EmployeeStatistical;
 import com.example.luadaomart.model.Good;
 import com.example.luadaomart.model.MonthStatistical;
 import com.example.luadaomart.viewholder.GoodViewHolder;
@@ -122,34 +124,100 @@ public class ManHomeActivity extends AppCompatActivity {
         TableRow r0 = new TableRow(this);
         TextView t1 = new TextView(this);
         TextView t2 = new TextView(this);
-        t1.setText("Employee");
-        t2.setText("Income");
+        TextView t3 = new TextView(this);
+        t1.setText("EmID");
+        t2.setText("Bill Count");
+        t3.setText("Income");
         r0.addView(t1);
         r0.addView(t2);
+        r0.addView(t3);
 
         tableLayout.addView(r0);
+
+        List<EmployeeStatistical> emList = new ArrayList<>();
+        db.collection("emStatisticals").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for(DocumentSnapshot docum: task.getResult()){
+                                EmployeeStatistical day = docum.toObject(EmployeeStatistical.class);
+                                emList.add(day);
+                            }
+                            for(EmployeeStatistical es : emList){
+                                TableRow r = new TableRow(getBaseContext());
+                                TextView tt1 = new TextView(getBaseContext());
+                                TextView tt2 = new TextView(getBaseContext());
+                                TextView tt3 = new TextView(getBaseContext());
+                                tt1.setText(es.getEmID());
+                                tt2.setText(es.getCount()+"");
+                                tt3.setText(es.getTotal()+"");
+                                r.addView(tt1);
+                                r.addView(tt2);
+                                r.addView(tt3);
+                                tableLayout.addView(r);
+                            }
+                        }
+                    }
+                });
+
     }
 
     private void staticByDay() {
         TableRow r0 = new TableRow(this);
         TextView t1 = new TextView(this);
         TextView t2 = new TextView(this);
+        TextView t3 = new TextView(this);
         t1.setText("Day");
-        t2.setText("Income");
+        t2.setText("Bill Count");
+        t3.setText("Income");
         r0.addView(t1);
         r0.addView(t2);
+        r0.addView(t3);
 
         tableLayout.addView(r0);
+
+        List<DayStatistical> dayList = new ArrayList<>();
+        db.collection("dayStatisticals").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for(DocumentSnapshot docum: task.getResult()){
+                                DayStatistical day = docum.toObject(DayStatistical.class);
+                                dayList.add(day);
+                            }
+                            for(DayStatistical ds : dayList){
+                                TableRow r = new TableRow(getBaseContext());
+                                TextView tt1 = new TextView(getBaseContext());
+                                TextView tt2 = new TextView(getBaseContext());
+                                TextView tt3 = new TextView(getBaseContext());
+                                tt1.setText(ds.getDay());
+                                tt2.setText(ds.getCount()+"");
+                                tt3.setText(ds.getTotal()+"");
+                                r.addView(tt1);
+                                r.addView(tt2);
+                                r.addView(tt3);
+                                tableLayout.addView(r);
+                            }
+                        }
+                    }
+                });
+
     }
 
     private void staticByMonth() {
         TableRow r0 = new TableRow(this);
         TextView t1 = new TextView(this);
         TextView t2 = new TextView(this);
+        TextView t3 = new TextView(this);
         t1.setText("Month");
-        t2.setText("Income");
+        t2.setText("Bill Count");
+        t3.setText("Income");
         r0.addView(t1);
         r0.addView(t2);
+        r0.addView(t3);
+
 
         tableLayout.addView(r0);
 
@@ -167,10 +235,13 @@ public class ManHomeActivity extends AppCompatActivity {
                                 TableRow r = new TableRow(getBaseContext());
                                 TextView tt1 = new TextView(getBaseContext());
                                 TextView tt2 = new TextView(getBaseContext());
+                                TextView tt3 = new TextView(getBaseContext());
                                 tt1.setText(ms.getMonth());
-                                tt2.setText(ms.getTotal()+"");
+                                tt2.setText(ms.getCount()+"");
+                                tt3.setText(ms.getTotal()+"");
                                 r.addView(tt1);
                                 r.addView(tt2);
+                                r.addView(tt3);
                                 tableLayout.addView(r);
                             }
                         }

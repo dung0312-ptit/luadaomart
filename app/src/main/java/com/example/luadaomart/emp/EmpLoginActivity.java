@@ -28,6 +28,7 @@ public class EmpLoginActivity extends AppCompatActivity {
     private EditText usernameTxt,passTxt;
     private Button loginBtn;
 
+    public static Employee employee;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
@@ -40,6 +41,7 @@ public class EmpLoginActivity extends AppCompatActivity {
         passTxt = findViewById(R.id.emp_login_pass_text);
         loginBtn = findViewById(R.id.emp_login_btn);
 
+        employee = new Employee();
         loginBtn.setOnClickListener(view -> {
             loginUser();
         });
@@ -65,10 +67,9 @@ public class EmpLoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             Log.d(TAG,task.isSuccessful()+"");
                             if(task.isSuccessful()){
-                                Employee employee = task.getResult().toObject(Employee.class);
+                                employee = task.getResult().toObject(Employee.class);
                                 if(employee!=null && employee.getPassword().equals(password)){
                                     Intent intent = new Intent(EmpLoginActivity.this,EmpHomeActivity.class);
-                                    intent.putExtra("user",employee);
                                     startActivity(intent);
                                 }else{
                                     Toast.makeText(EmpLoginActivity.this,"Wrong username or password", Toast.LENGTH_LONG).show();

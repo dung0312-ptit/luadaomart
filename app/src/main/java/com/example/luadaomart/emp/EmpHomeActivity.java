@@ -46,7 +46,7 @@ public class EmpHomeActivity extends AppCompatActivity {
 
         oderCol = db.collection("orders");
 
-        employee = (Employee) getIntent().getSerializableExtra("user");
+        employee = EmpLoginActivity.employee;
 
         newOrderBtn = findViewById(R.id.emp_home_new_order);
         oderHisRv = findViewById(R.id.emp_home_Oder_rv);
@@ -61,7 +61,7 @@ public class EmpHomeActivity extends AppCompatActivity {
     }
 
     private void showOrderHis() {
-        Log.d(TAG,employee.getId());
+        //Log.d(TAG,employee.getId());
         Query query = oderCol
                 .whereEqualTo("employeeId",employee.getId())
                 .orderBy("timestamps")
@@ -110,6 +110,6 @@ public class EmpHomeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
     }
 }
