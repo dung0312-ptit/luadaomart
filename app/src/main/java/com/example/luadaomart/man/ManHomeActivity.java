@@ -68,7 +68,7 @@ public class ManHomeActivity extends AppCompatActivity {
     public static Admin admin;
 
     private int total,cash,credit;
-    private Button addEmpBtn, storageBtn,endDayBtn;
+    private Button addEmpBtn, storageBtn,endDayBtn,logoutBtn,billListBtn;
     private RecyclerView runningOutRv, orderHisRv;
     private Spinner incomeSpin;
     private TableLayout tableLayout;
@@ -118,12 +118,25 @@ public class ManHomeActivity extends AppCompatActivity {
         creditTxt = findViewById(R.id.man_endday_credit);
         cashTxt = findViewById(R.id.man_endday_cash);
         endTotalTxt = findViewById(R.id.man_endday_total);
+        logoutBtn = findViewById(R.id.man_logout_btn);
+        billListBtn = findViewById(R.id.man_home_bill_trace);
 
 
 
 
         getRunningOutList();
         getToday();
+
+        billListBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(ManHomeActivity.this, ManAllBillActivity.class);
+            startActivity(intent);
+        });
+
+        logoutBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(ManHomeActivity.this, ManLoginActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
         endDayBtn.setOnClickListener(view -> {
             endDayLayout.setVisibility(View.VISIBLE);
@@ -284,12 +297,6 @@ public class ManHomeActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         orderHisRv.setLayoutManager(layoutManager);
         orderHisRv.setAdapter(orderHisAdapter);
-
-
-
-
-
-
 
     }
 
