@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.luadaomart.R;
@@ -52,6 +53,7 @@ public class NewOrderActivity extends AppCompatActivity implements GoodOrderAdap
     private TextView totalTxt, dateTxt;
     private EditText phoneTxt;
     private Button cancelBtn, checkoutBtn;
+    private Spinner methodSpin;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference goodCol, orderCol;
@@ -84,6 +86,7 @@ public class NewOrderActivity extends AppCompatActivity implements GoodOrderAdap
         dateTxt = findViewById(R.id.order_date);
         cancelBtn = findViewById(R.id.order_cancel);
         checkoutBtn = findViewById(R.id.order_submit);
+        methodSpin = findViewById(R.id.order_method_spin);
 
 
         order = new Order(System.currentTimeMillis());
@@ -139,6 +142,7 @@ public class NewOrderActivity extends AppCompatActivity implements GoodOrderAdap
             List<OrderDetail> orderDetails = detailApdater.getList();
             order.setEmployeeId(EmpHomeActivity.employee.getId());
             order.setEmployeeName(EmpHomeActivity.employee.getName());
+            order.setMethod(methodSpin.getSelectedItemPosition());
 
             String phone = phoneTxt.getText().toString().trim();
             if (phone.equals("")) phone += "no infor";

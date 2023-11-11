@@ -5,4 +5,8 @@
         <item>Days</item>
         <item>Employees</item>
     </string-array>
+    <string-array name="method">
+        <item>CASH</item>
+        <item>CREDIT CARD</item>
+    </string-array>
 </resources>

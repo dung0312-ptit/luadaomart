@@ -106,7 +106,7 @@
         android:layout_height="wrap_content"
         android:text="2023-11-5"
         android:textStyle="bold"
-        android:layout_above="@id/order_phone_txt"
+        android:layout_above="@id/order_method_spin"
         android:textAlignment="textEnd"
         android:id="@+id/order_date"
         android:textSize="20dp"
@@ -121,6 +121,17 @@
         android:id="@+id/order_phone_txt"
         android:textSize="20dp"
         android:paddingHorizontal="15dp" />
+    <Spinner
+        android:id="@+id/order_method_spin"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_above="@id/order_phone_txt"
+        android:background="@drawable/input_item"
+        android:entries="@array/method"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="textEnd"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"

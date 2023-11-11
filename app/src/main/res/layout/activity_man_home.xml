@@ -15,73 +15,430 @@
         <Button
             android:id="@+id/man_home_add_emp"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="7dp"
-            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
             android:background="@drawable/button_item"
             android:text="Employees" />
 
         <Button
             android:id="@+id/man_home_storage"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
             android:layout_weight="1"
+            android:background="@drawable/button_item"
+            android:text="Storage" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/topview2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topview"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/man_home_bill_trace"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="7dp"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_item"
+            android:text="All bills" />
+
+        <Button
+            android:id="@+id/man_home_end_day"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="7dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="15dp"
-            android:background="@drawable/button_item"
-            android:text="Storage" />
+            android:layout_weight="1"
+            android:background="@drawable/submit_button_item"
+            android:text="Today Income" />
     </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/topview">
+        android:layout_below="@+id/topview2">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="15dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingHorizontal="15dp">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:layout_weight="1"
                 android:text="running out goods"
-                android:textSize="20dp"
                 android:textAllCaps="true"
-                android:textStyle="bold"/>
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/man_home_running_rv"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_marginTop="7dp"/>
+                android:layout_marginTop="7dp" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
+                android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:text="Income Statistical"
-                android:textSize="20dp"
                 android:textAllCaps="true"
-                android:textStyle="bold"
-                android:layout_marginTop="15dp"/>
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
             <Spinner
+                android:id="@+id/man_income_spin"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:layout_marginTop="10dp"
-                android:id="@+id/man_income_spin"
-                android:entries="@array/income"
-                android:background="@drawable/input_item"/>
+                android:background="@drawable/input_item"
+                android:entries="@array/income" />
+
             <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/man_home_table"
-                android:stretchColumns="*"
-                android:layout_marginTop="10dp">
-            </TableLayout>
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"
+                android:stretchColumns="*"></TableLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:text="Today Orders and income"
+                android:textAllCaps="true"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/man_home_today_ord_txt"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="Total Order: 2020"
+                android:textColor="@color/Ogre_Odor"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/man_home_today_income_txt"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="Total income: 2020"
+                android:textColor="@color/Ogre_Odor"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/man_home_today_oders"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="10dp" />
+
+            <Button
+                android:id="@+id/man_logout_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="10dp"
+                android:background="@drawable/button_item"
+                android:text="LOG out" />
+
         </LinearLayout>
     </ScrollView>
 
+    <RelativeLayout
+        android:id="@+id/man_end_day_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_trans"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:id="@+id/endday"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/border_item"
+            android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/count"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Bill Count: " />
+
+                <TextView
+                    android:id="@+id/man_endday_count"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="30000"
+                    android:textAlignment="textEnd" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cradit"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/count"
+                android:layout_marginTop="3dp"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Credit amount: " />
+
+                <TextView
+                    android:id="@+id/man_endday_credit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="30000"
+                    android:textAlignment="textEnd" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cash"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cradit"
+                android:layout_marginTop="3dp"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cash amount: " />
+
+                <TextView
+                    android:id="@+id/man_endday_cash"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="30000"
+                    android:textAlignment="textEnd" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/total"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cash"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Total: " />
+
+                <TextView
+                    android:id="@+id/man_endday_total"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="30000"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/Ogre_Odor"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/man_end_day_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/endday"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_item"
+            android:text="Cancel" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/man_bill_infor_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_trans"
+        android:visibility="gone">
+
+
+        <LinearLayout
+            android:id="@+id/infor"
+            android:layout_width="300dp"
+            android:layout_height="500dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/border_item"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="5dp"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/man_bill_em"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="test"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/man_bill_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="test"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="5dp"
+                android:weightSum="15">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="Code"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="6"
+                    android:gravity="center"
+                    android:text="Name"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:text="Price"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Qu"
+                    android:textSize="13dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:text="Money"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/man_bill_rv"
+                android:layout_width="match_parent"
+                android:layout_height="325dp"
+                android:layout_marginTop="15dp" />
+
+            <TextView
+                android:id="@+id/man_bill_total"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="20000"
+                android:textAlignment="textEnd"
+                android:textColor="@color/Ogre_Odor"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/man_bill_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="Number"
+                android:textAlignment="textEnd"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/man_bill_method"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="Method"
+                android:textAlignment="textEnd"
+                android:textSize="20dp" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/man_bill_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/infor"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_item"
+            android:text="Cancel" />
+
+    </RelativeLayout>
 </RelativeLayout>

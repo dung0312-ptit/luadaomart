@@ -9,6 +9,7 @@ public class Order implements Serializable {
     private long timestamps;
     private int totalPrices;
     private String cusPhone;
+    private int method;
 
     public Order() {
     }
@@ -17,12 +18,21 @@ public class Order implements Serializable {
         this.timestamps = timestamps;
     }
 
-    public Order(String employeeId, String employeeName, long timestamps, int totalPrices, String cusPhone) {
+    public Order(String employeeId, String employeeName, long timestamps, int totalPrices, String cusPhone, int method) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.timestamps = timestamps;
         this.totalPrices = totalPrices;
         this.cusPhone = cusPhone;
+        this.method = method;
+    }
+
+    public int getMethod() {
+        return method;
+    }
+
+    public void setMethod(int method) {
+        this.method = method;
     }
 
     public String getEmployeeId() {
