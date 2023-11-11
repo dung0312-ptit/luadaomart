@@ -7,6 +7,7 @@ public class OrderDetail implements Serializable {
     private String name;
     private int price;
     private int amount;
+    private int max;
     private int total;
 
     public OrderDetail() {
@@ -20,8 +21,25 @@ public class OrderDetail implements Serializable {
         this.total = total;
     }
 
+    public OrderDetail(String id, String name, int price, int amount, int max, int total) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.amount = amount;
+        this.max = max;
+        this.total = total;
+    }
+
     public String getId() {
         return id;
+    }
+
+    public int getMax() {
+        return max;
+    }
+
+    public void setMax(int max) {
+        this.max = max;
     }
 
     public void setId(String id) {

@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.luadaomart.R;
 import com.example.luadaomart.adapter.GoodOrderAdapter;
@@ -172,6 +173,10 @@ public class NewOrderActivity extends AppCompatActivity implements GoodOrderAdap
         db.collection("dayStatisticals").document(ds.getDay()).set(ds);
         db.collection("emStatisticals").document(employee.getId()).update("count",1);
         db.collection("emStatisticals").document(employee.getId()).update("total",order.getTotalPrices());
+
+        for (OrderDetail od : orderDetails) {
+            goodCol.document(od.getId()).update("quantity", FieldValue.increment( 0-od.getAmount()));
+        }
         InvoiceGenerator invoice = new InvoiceGenerator(orderDetails, order);
         invoice.createInvoice();
 
@@ -267,7 +272,12 @@ public class NewOrderActivity extends AppCompatActivity implements GoodOrderAdap
     }
 
     private void choseGood(Good model) {
-        OrderDetail orderDetail = new OrderDetail(model.getCode(), model.getName(), model.getPrice(), 1, model.getPrice());
+
+        if(model.getQuantity()<=0){
+            Toast.makeText(NewOrderActivity.this,"This item is running out",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        OrderDetail orderDetail = new OrderDetail(model.getCode(), model.getName(), model.getPrice(), 1,model.getQuantity(), model.getPrice());
         order.setTotalPrices(order.getTotalPrices() + model.getPrice());
         detailApdater.setTotal(order.getTotalPrices());
         detailApdater.list.add(orderDetail);

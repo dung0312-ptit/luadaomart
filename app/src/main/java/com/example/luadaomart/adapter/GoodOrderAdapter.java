@@ -78,6 +78,8 @@ public class GoodOrderAdapter extends RecyclerView.Adapter<OrderDetailViewHolder
             try{
                 int newA = Integer.parseInt(holder.editAmountTxt.getText().toString().trim());
                 if(newA>0){
+                    if(newA>o.getMax())newA = o.getMax();
+
                         total =total-o.getPrice()*o.getAmount() + o.getPrice()*newA;
                         o.setAmount(newA);
                         o.setTotal(newA*o.getPrice());
