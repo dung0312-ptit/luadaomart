@@ -64,7 +64,7 @@ public class EmpHomeActivity extends AppCompatActivity {
         //Log.d(TAG,employee.getId());
         Query query = oderCol
                 .whereEqualTo("employeeId",employee.getId())
-                .orderBy("timestamps")
+                .orderBy("timestamps", Query.Direction.DESCENDING)
                 .limit(15);
 
         FirestoreRecyclerOptions<Order> options = new FirestoreRecyclerOptions.Builder<Order>()

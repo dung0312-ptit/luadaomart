@@ -41,6 +41,7 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -178,7 +179,11 @@ public class NewOrderActivity extends AppCompatActivity implements GoodOrderAdap
             goodCol.document(od.getId()).update("quantity", FieldValue.increment( 0-od.getAmount()));
         }
         InvoiceGenerator invoice = new InvoiceGenerator(orderDetails, order);
-        invoice.createInvoice();
+        try {
+            invoice.createInvoice();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
 
         Intent intent = new Intent(NewOrderActivity.this, EmpHomeActivity.class);
