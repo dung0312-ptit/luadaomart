@@ -18,7 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:background="@drawable/input_item"
-            app:queryHint="Search" />
+            app:queryHint="Search"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:id="@+id/date"

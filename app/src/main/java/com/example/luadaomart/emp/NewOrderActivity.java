@@ -92,6 +92,7 @@ public class NewOrderActivity extends AppCompatActivity implements GoodOrderAdap
 
 
         order = new Order(System.currentTimeMillis());
+        order.setId(order.getTimestamps()+"");
         //monthStatistic();
         checkMonthStatistic();
         checkDayStatistic();

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Map;
 
 public class Order implements Serializable {
+    private String id;
     private String employeeId;
     private String employeeName;
     private long timestamps;
@@ -25,6 +26,24 @@ public class Order implements Serializable {
         this.totalPrices = totalPrices;
         this.cusPhone = cusPhone;
         this.method = method;
+    }
+
+    public Order(String id, String employeeId, String employeeName, long timestamps, int totalPrices, String cusPhone, int method) {
+        this.id = id;
+        this.employeeId = employeeId;
+        this.employeeName = employeeName;
+        this.timestamps = timestamps;
+        this.totalPrices = totalPrices;
+        this.cusPhone = cusPhone;
+        this.method = method;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public int getMethod() {
