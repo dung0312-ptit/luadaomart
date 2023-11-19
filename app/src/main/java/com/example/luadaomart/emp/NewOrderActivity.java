@@ -233,7 +233,7 @@ public class NewOrderActivity extends AppCompatActivity implements GoodOrderAdap
 
 
     private void getGoodList(String s) {
-        Query query = goodCol.orderBy("code").startAt(s).endAt(s + "\uf8ff");
+        Query query = goodCol.orderBy("name").startAt(s).endAt(s + "\uf8ff");
 
         FirestoreRecyclerOptions<Good> options = new FirestoreRecyclerOptions.Builder<Good>()
                 .setQuery(query, Good.class)

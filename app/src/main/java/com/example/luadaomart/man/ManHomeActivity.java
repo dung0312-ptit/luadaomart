@@ -134,6 +134,7 @@ public class ManHomeActivity extends AppCompatActivity {
 
         logoutBtn.setOnClickListener(view -> {
             Intent intent = new Intent(ManHomeActivity.this, ManLoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
         });

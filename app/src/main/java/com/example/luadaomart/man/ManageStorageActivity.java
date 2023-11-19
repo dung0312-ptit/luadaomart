@@ -99,7 +99,7 @@ public class ManageStorageActivity extends AppCompatActivity {
             try{
                 int price = Integer.parseInt(priceTxt.getText().toString().trim());
                 int quantity = Integer.parseInt(quantityTxt.getText().toString().trim());
-                if (name.equals("") || code.equals("") || price<=0 || quantity<0 ) {
+                if (name.equals("") || code.equals("") || price<0 || quantity<0 ) {
                     Toast.makeText(ManageStorageActivity.this, "Fill the form please", Toast.LENGTH_SHORT).show();
                 } else {
                     Good g = new Good(code,name,price,quantity);
@@ -115,7 +115,7 @@ public class ManageStorageActivity extends AppCompatActivity {
     }
 
     private void getGoodList(String s) {
-        Query query = goodCol.orderBy("code").startAt(s).endAt(s+"\uf8ff");
+        Query query = goodCol.orderBy("name").startAt(s).endAt(s+"\uf8ff");
 
         FirestoreRecyclerOptions<Good> options = new FirestoreRecyclerOptions.Builder<Good>()
                 .setQuery(query, Good.class)
