@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">luadaomart</string>
+    <string name="app_name">Mi Mart</string>
     <string-array name="income">
         <item>Months</item>
         <item>Days</item>

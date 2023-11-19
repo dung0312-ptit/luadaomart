@@ -202,7 +202,7 @@ public class ManHomeActivity extends AppCompatActivity {
         now.set(Calendar.HOUR_OF_DAY, 0);
 
         now.getTime().getTime();
-        Toast.makeText(ManHomeActivity.this,now.getTime().getTime()+" "+now.getTime().toString(),Toast.LENGTH_LONG).show();
+        //Toast.makeText(ManHomeActivity.this,now.getTime().getTime()+" "+now.getTime().toString(),Toast.LENGTH_LONG).show();
         orderCol.whereGreaterThanOrEqualTo("timestamps",now.getTime().getTime())
                 .orderBy("timestamps", Query.Direction.DESCENDING).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -235,7 +235,7 @@ public class ManHomeActivity extends AppCompatActivity {
         now.set(Calendar.HOUR_OF_DAY, 0);
 
         now.getTime().getTime();
-        Toast.makeText(ManHomeActivity.this,now.getTime().getTime()+" "+now.getTime().toString(),Toast.LENGTH_LONG).show();
+       // Toast.makeText(ManHomeActivity.this,now.getTime().getTime()+" "+now.getTime().toString(),Toast.LENGTH_LONG).show();
         Query query = orderCol
                 .whereGreaterThanOrEqualTo("timestamps",now.getTime().getTime())
                 .orderBy("timestamps", Query.Direction.DESCENDING);
